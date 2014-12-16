@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="en">
+<title>Install and Use BAM Bootloader for MPC55xx on Phytec phyCORE-MPC5554</title>
+<sect1>
+<title>License</title>
+
+<para>Author: Jan Kobler, Kobler Systems GmbH, email: eng1@koblersystems.de</para>
+<para>This work by <ulink url="http://www.koblersystems.de">Kobler Systems GmbH</ulink> is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit <ulink url="http://creativecommons.org/licenses/by/4.0/"/>.</para>
+<para></para>
+</sect1>
+<sect1>
+<title>Install Python</title>
+
+<para>Follow the instructions on <ulink url="https://www.python.org"/> to install Python. Select the latest stable version of Pyhton 3.</para>
+<para>Install support for serial port</para>
+<screen>
+python -m pip install pyserial</screen>
+
+<para>You can find more information about pyserial on <ulink url="http://pythonhosted.org/pyserial"/>. </para>
+</sect1>
+<sect1>
+<title>Test with Phytec phyCORE-MPC5554</title>
+
+<para>You need to set the Jumper JP1 to the memory, which has been erased. When BAM cannot start an application in the selected memory, then it listens on the eSCI_A and on the CAN port. </para>
+<para>Connect the serial cable to the lower serial port. </para>
+</sect1>
+</article>
