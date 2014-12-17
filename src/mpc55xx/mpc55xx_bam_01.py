@@ -55,11 +55,14 @@ class bam_01:
         self.flag_debug1 = False
         self.password1 = "FEED FACE CAFE BEEF"
         self.send_wait1 = None # Time in seconds, float
-    
+        self.ser_baudrate1 = 9600
+        self.ser_baudrate2 = 115200
+	
+	
     def test_01(self):
         
         if True:
-            self.ser1 = serial.Serial(self.ser_port1, 9600, timeout=30)
+            self.ser1 = serial.Serial(self.ser_port1, self.ser_baudrate1, timeout=30)
             self.pos1 = 0
             
         pw1 = self.get_password1()
@@ -132,7 +135,7 @@ class bam_01:
         print("File:", file_name1, "Size:", size1)
         
         if True:
-            self.ser1 = serial.Serial(self.ser_port1, 9600, timeout=30)
+            self.ser1 = serial.Serial(self.ser_port1, self.ser_baudrate1, timeout=30)
             self.pos1 = 0
                                 
         pw1 = self.get_password1()
@@ -248,7 +251,7 @@ class bam_01:
         if self.ser1 is not None:
             self.ser1.close()
 
-        speed1 = 115200
+        speed1 = self.ser_baudrate2
         self.ser1 = serial.Serial(self.ser_port1, speed1, timeout=30)
         self.pos1 = 0
         
@@ -280,9 +283,11 @@ class bam_01:
         
         p1.add_argument("--port", help="serial port", default=sys_port1)
         
-        p1.add_argument("--listen", action="store_true", help="listen to serial port AFTER uploading, speed 115200",)
+        p1.add_argument("--listen", action="store_true", help="listen to serial port AFTER uploading",)
+        p1.add_argument("--listen_baudrate", type=int, help="listen to serial port AFTER uploading with this baudrate, e.g. 115200",)
 
         p1.add_argument("--sync", action="store_true", help="MPC56xx only: send sync byte at the beginning for Baud Rate Detection ")
+        p1.add_argument("--start_baudrate", type=int, help="MPC56xx: start with baudrate, MPC55xx: only 9600")
 
         p1.add_argument("--debug", action="store_true", help="provide debug output")
         
@@ -314,8 +319,14 @@ class bam_01:
             if a1.listen:
                 print("wait for output:", a1.listen)
                 
+            if a1.listen_baudrate:
+                print("after uploading wait for output with baudrate:", a1.listen_baudrate)
+               
             if a1.sync:
                 print("Sync: ", a1.sync)
+                
+            if a1.start_baudrate:
+                print("Start with baudrate: ", a1.start_baudrate)
                 
             if a1.debug:
                 print("Debug: ", a1.debug)
@@ -339,8 +350,14 @@ class bam_01:
             if a1.listen:
                 self.flag_test3 = a1.listen
                 
+            if a1.listen_baudrate:
+                self.ser_baudrate2 = a1.listen_baudrate
+                
             if a1.sync:
                 self.ser_sync1 = a1.sync
+                
+            if a1.start_baudrate:
+                self.ser_baudrate1 = a1.start_baudrate
                 
             if a1.debug:
                 self.flag_debug1 = a1.debug
