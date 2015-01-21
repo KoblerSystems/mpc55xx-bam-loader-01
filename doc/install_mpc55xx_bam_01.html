@@ -1,23 +1,34 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Install and Use BAM Bootloader for MPC55xx on Phytec phyCORE-MPC5554</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.0"><style type="text/css">pre.screen {  background-color: #FFFF99 ;  border: 1px solid #006600 ;}pre.screen { padding: 1em; border: 1px dashed rgb(47, 111, 171); color: black; background-color: rgb(249, 249, 249); line-height: 1.1em; }code.code {  color: darkgreen;   font-weight: bold;   font-family: monospace;}</style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div lang="en" class="article"><div class="titlepage"><div><div><h2 class="title"><a name="idm140621727705008"></a>Install and Use BAM Bootloader for MPC55xx on Phytec phyCORE-MPC5554</h2></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="sect1"><a href="#idm140621727701328">1. License</a></span></dt><dt><span class="sect1"><a href="#idm140621727703872">2. Install Python</a></span></dt><dt><span class="sect1"><a href="#idm140621727350176">3. Test with Phytec phyCORE-MPC5554</a></span></dt></dl></div>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Install and Use BAM Bootloader for MPC55xx on Phytec phyCORE-MPC5554</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.0"><style type="text/css">pre.screen {  background-color: #FFFF99 ;  border: 1px solid #006600 ;}pre.screen { padding: 1em; border: 1px dashed rgb(47, 111, 171); color: black; background-color: rgb(249, 249, 249); line-height: 1.1em; }code.code {  color: darkgreen;   font-weight: bold;   font-family: monospace;}</style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div lang="en" class="article"><div class="titlepage"><div><div><h2 class="title"><a name="idm140451540256416"></a>Install and Use BAM Bootloader for MPC55xx on Phytec phyCORE-MPC5554</h2></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="sect1"><a href="#idm140451539199792">1. License</a></span></dt><dt><span class="sect1"><a href="#idm140451539195520">2. Install Python</a></span></dt><dt><span class="sect1"><a href="#idm140451538849744">3. Install the software</a></span></dt><dt><span class="sect1"><a href="#idm140451538843840">4. Test with Phytec phyCORE-MPC5554</a></span></dt></dl></div>
 
-<div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm140621727701328"></a>1. License</h2></div></div></div>
+<div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm140451539199792"></a>1. License</h2></div></div></div>
 
 
 <p>Author: Jan Kobler, Kobler Systems GmbH, email: eng1@koblersystems.de</p>
-<p>This work by <a class="ulink" href="http://www.koblersystems.de" target="_top">Kobler Systems GmbH</a> is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit <a class="ulink" href="http://creativecommons.org/licenses/by/4.0/" target="_top">http://creativecommons.org/licenses/by/4.0/</a>.</p>
+<p>This work (text) by <a class="ulink" href="http://www.koblersystems.de" target="_top">Kobler Systems GmbH</a> is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit <a class="ulink" href="http://creativecommons.org/licenses/by/4.0/" target="_top">http://creativecommons.org/licenses/by/4.0/</a>.</p>
 <p></p>
 </div>
-<div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm140621727703872"></a>2. Install Python</h2></div></div></div>
+<div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm140451539195520"></a>2. Install Python</h2></div></div></div>
 
 
-<p>Follow the instructions on <a class="ulink" href="https://www.python.org" target="_top">https://www.python.org</a> to install Python. Select the latest stable version of Pyhton 3.</p>
-<p>Install support for serial port</p>
-<pre class="screen">
-python -m pip install pyserial</pre>
-
-<p>You can find more information about pyserial on <a class="ulink" href="http://pythonhosted.org/pyserial" target="_top">http://pythonhosted.org/pyserial</a>. </p>
+<p>Follow the instructions on <a class="ulink" href="https://www.python.org" target="_top">https://www.python.org</a> to install Python. For <code class="code">mpc55xx-bam-loader-g1</code> select the latest stable version of <span class="strong"><strong>Python 3</strong></span>. At the moment this is Python 3.4. </p>
+<p>If <code class="code">pip</code> is not already installed follow the instructions on <a class="ulink" href="https://pip.pypa.io/en/latest/installing.html" target="_top">https://pip.pypa.io/en/latest/installing.html</a></p>
 </div>
-<div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm140621727350176"></a>3. Test with Phytec phyCORE-MPC5554</h2></div></div></div>
+<div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm140451538849744"></a>3. Install the software</h2></div></div></div>
+
+
+<p>Use the tool <code class="code">pip</code> to install the package <code class="code">mpc55xx-bam-loader-g1</code></p>
+<pre class="screen">
+pip install mpc55xx-bam-loader-g1</pre>
+
+<p>You can find more information about using <code class="code">pip</code> on <a class="ulink" href="https://pip.pypa.io/en/latest/user_guide.html" target="_top">https://pip.pypa.io/en/latest/user_guide.html</a>. </p>
+<p>If not yet installed, the software <code class="code">pyserial</code> will be also installed. You can find more information about pyserial on <a class="ulink" href="http://pythonhosted.org/pyserial" target="_top">http://pythonhosted.org/pyserial</a>. </p>
+<p>Test if the application is started. On the command line type: </p>
+<pre class="screen">
+mpc55xx-bam-loader</pre>
+
+<p>A help text should appear with a list of possible arguments. </p>
+</div>
+<div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm140451538843840"></a>4. Test with Phytec phyCORE-MPC5554</h2></div></div></div>
 
 
 <p>You need to set the Jumper JP1 to the memory, which has been erased. When BAM cannot start an application in the selected memory, then it listens on the eSCI_A and on the CAN port. </p>

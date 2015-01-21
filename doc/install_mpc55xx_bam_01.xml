@@ -5,18 +5,29 @@
 <title>License</title>
 
 <para>Author: Jan Kobler, Kobler Systems GmbH, email: eng1@koblersystems.de</para>
-<para>This work by <ulink url="http://www.koblersystems.de">Kobler Systems GmbH</ulink> is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit <ulink url="http://creativecommons.org/licenses/by/4.0/"/>.</para>
+<para>This work (text) by <ulink url="http://www.koblersystems.de">Kobler Systems GmbH</ulink> is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit <ulink url="http://creativecommons.org/licenses/by/4.0/"/>.</para>
 <para></para>
 </sect1>
 <sect1>
 <title>Install Python</title>
 
-<para>Follow the instructions on <ulink url="https://www.python.org"/> to install Python. Select the latest stable version of Pyhton 3.</para>
-<para>Install support for serial port</para>
-<screen>
-python -m pip install pyserial</screen>
+<para>Follow the instructions on <ulink url="https://www.python.org"/> to install Python. For <code>mpc55xx-bam-loader-g1</code> select the latest stable version of <emphasis role="strong">Python 3</emphasis>. At the moment this is Python 3.4. </para>
+<para>If <code>pip</code> is not already installed follow the instructions on <ulink url="https://pip.pypa.io/en/latest/installing.html"/></para>
+</sect1>
+<sect1>
+<title>Install the software</title>
 
-<para>You can find more information about pyserial on <ulink url="http://pythonhosted.org/pyserial"/>. </para>
+<para>Use the tool <code>pip</code> to install the package <code>mpc55xx-bam-loader-g1</code></para>
+<screen>
+pip install mpc55xx-bam-loader-g1</screen>
+
+<para>You can find more information about using <code>pip</code> on <ulink url="https://pip.pypa.io/en/latest/user_guide.html"/>. </para>
+<para>If not yet installed, the software <code>pyserial</code> will be also installed. You can find more information about pyserial on <ulink url="http://pythonhosted.org/pyserial"/>. </para>
+<para>Test if the application is started. On the command line type: </para>
+<screen>
+mpc55xx-bam-loader</screen>
+
+<para>A help text should appear with a list of possible arguments. </para>
 </sect1>
 <sect1>
 <title>Test with Phytec phyCORE-MPC5554</title>

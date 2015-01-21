@@ -1,0 +1,5 @@
+include DESCRIPTION.rst
+include README.md
+include doc/install_mpc55xx_bam_01.xml
+include doc/install_mpc55xx_bam_01.html
+
