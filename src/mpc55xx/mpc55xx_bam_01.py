@@ -57,6 +57,7 @@ class bam_01:
         self.send_wait1 = None # Time in seconds, float
         self.ser_baudrate1 = 9600
         self.ser_baudrate2 = 115200
+        self.flag_debug2 = False
 	
 	
     def test_01(self):
@@ -205,7 +206,11 @@ class bam_01:
         
         for b1 in buf1:
             
-            print("pos: ", hex(self.pos1),"write: ", hex(b1))
+            if self.flag_debug2:
+                print("pos: ", hex(self.pos1),"write: ", hex(b1))
+            elif self.pos1 % 1024 == 0:
+                print("pos: ", hex(self.pos1))
+                
             if self.ser1 is not None:
                 if self.send_wait1:
                     time.sleep(self.send_wait1)
@@ -228,7 +233,8 @@ class bam_01:
         if self.ser_sync1 == True:
             b1 = 0x0
             print("MPC56xx Baud Rate detection, send 0x0 as test frame")
-            print("pos: ", hex(self.pos1),"write: ", hex(b1))
+            if self.flag_debug2:
+                print("pos: ", hex(self.pos1),"write: ", hex(b1))
             self.ser1.write((0x0).to_bytes(1,byteorder='big'))    
             # No answer expected
             self.pos1 += 1
@@ -292,6 +298,7 @@ class bam_01:
         p1.add_argument("--start_baudrate", type=int, help="MPC56xx: start with baudrate, MPC55xx: only 9600")
 
         p1.add_argument("--debug", action="store_true", help="provide debug output")
+        p1.add_argument("--debugWrite", action="store_true", help="provide debug output for write to target serial port")
         
         p1.add_argument("--password", help="Password: 8byte, hex, spaces allowed, e.g. FEED FACE CAFE BEEF")
         p1.add_argument("--sendwait", help="Time to wait before sending a byte, in seconds, may be float number")
@@ -364,6 +371,9 @@ class bam_01:
             if a1.debug:
                 self.flag_debug1 = a1.debug
                 
+            if a1.debugWrite:
+                self.flag_debug2 = a1.debugWrite
+
             if a1.password:
                 self.password1 = a1.password
                 
