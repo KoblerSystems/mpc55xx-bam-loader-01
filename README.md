@@ -12,7 +12,8 @@ usage: mpc55xx_bam_01.py [-h] [--test {echo,asm} | --image IMAGE]
                          [--address ADDRESS] [--port PORT] [--listen]
                          [--listen_baudrate LISTEN_BAUDRATE] [--sync]
                          [--start_baudrate START_BAUDRATE] [--debug]
-                         [--password PASSWORD] [--sendwait SENDWAIT]
+                         [--debugWrite] [--debugRead] [--password PASSWORD]
+                         [--sendwait SENDWAIT]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -29,6 +30,8 @@ optional arguments:
   --start_baudrate START_BAUDRATE
                         MPC56xx: start with baudrate, MPC55xx: only 9600
   --debug               provide debug output
+  --debugWrite          provide debug output for write to target serial port
+  --debugRead           provide debug output for read from target serial port
   --password PASSWORD   Password: 8byte, hex, spaces allowed, e.g. FEED FACE
                         CAFE BEEF
   --sendwait SENDWAIT   Time to wait before sending a byte, in seconds, may be
