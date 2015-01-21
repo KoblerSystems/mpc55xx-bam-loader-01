@@ -1,7 +1,7 @@
 # 
 # The MIT License (MIT)
 # 
-# Copyright (c) 2014 Kobler Systems GmbH
+# Copyright (c) 2014, 2015 Kobler Systems GmbH
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of 
 # 
