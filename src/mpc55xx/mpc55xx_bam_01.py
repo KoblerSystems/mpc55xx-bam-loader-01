@@ -58,8 +58,9 @@ class bam_01:
         self.ser_baudrate1 = 9600
         self.ser_baudrate2 = 115200
         self.flag_debug2 = False
+        self.flag_debug3 = False
 	
-	
+    
     def test_01(self):
         
         if True:
@@ -271,8 +272,19 @@ class bam_01:
                 raise Exception("None returned, time out: ")
             
             for b1 in b2:
-                print("Returned: " + hex(b1) + " '" + str(b1) + "' " + chr(b1) )
-       
+                if self.flag_debug3:
+                    print("Returned: " + hex(b1) + " '" + str(b1) + "' " + chr(b1) )
+                else:
+                    if b1 == 13:
+                        pass
+                    elif b1 == 10:
+                        print()
+                    elif b1 < 32 or b1 == 127:
+                        print("("+hex(b1)+")",end='')
+                    else:
+                        print(chr(b1),end='')
+                self.input_state_03(b1, b"This is a test. I am sending something longer. Does it arrive?\n")   # NL at the end is important
+                    
     def parse_args_01(self, test_args1 = None):
         
         p1 = argparse.ArgumentParser()
@@ -299,6 +311,7 @@ class bam_01:
 
         p1.add_argument("--debug", action="store_true", help="provide debug output")
         p1.add_argument("--debugWrite", action="store_true", help="provide debug output for write to target serial port")
+        p1.add_argument("--debugRead", action="store_true", help="provide debug output for read from target serial port")
         
         p1.add_argument("--password", help="Password: 8byte, hex, spaces allowed, e.g. FEED FACE CAFE BEEF")
         p1.add_argument("--sendwait", help="Time to wait before sending a byte, in seconds, may be float number")
@@ -374,6 +387,9 @@ class bam_01:
             if a1.debugWrite:
                 self.flag_debug2 = a1.debugWrite
 
+            if a1.debugRead:
+                self.flag_debug2 = a1.debugRead
+                
             if a1.password:
                 self.password1 = a1.password
                 
