@@ -86,7 +86,7 @@ class bam_01:
         self.write_01(image1[1].to_bytes(4,'big'))
         
         
-        print("write data")
+        print("uploading data to the target")
         self.pos1 = 0
         if self.flag_test1 == "asm":
             code1 = "3c 60 40 00 38 a0 00 00 38 a5 00 01 90 a3 00 20 4b ff ff f8"
@@ -160,7 +160,7 @@ class bam_01:
         self.write_01(image1[1].to_bytes(4,'big'))
         
         
-        print("write data")
+        print("uploading data to the target")
         self.pos1 = 0
         if True:
             while True:
@@ -257,6 +257,8 @@ class bam_01:
         
         
         print("Waiting for output, speed", speed1)
+        print()
+        
         while True:
             b2 = self.ser1.read(1)
             if b2 is None or len(b2) == 0:
