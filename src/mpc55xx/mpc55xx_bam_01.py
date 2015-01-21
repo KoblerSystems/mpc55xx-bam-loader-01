@@ -262,6 +262,7 @@ class bam_01:
         self.ser1 = serial.Serial(self.ser_port1, speed1, timeout=30)
         self.pos1 = 0
         
+        self.input_reset_01()
         
         print("Waiting for output, speed", speed1)
         print()
@@ -288,6 +289,33 @@ class bam_01:
                         print(chr(b1),end='')
                 self.input_state_03(b1, b"This is a test. I am sending something longer. Does it arrive?\n")   # NL at the end is important
                     
+    def input_reset_01(self):
+        self.input_state_02 = input_state_01("mpc5676>")
+        self.input_state_02.reset_state_01()
+        
+    
+    def input_state_03(self, b1, text1):
+        """
+        b1: int
+        """
+        
+        self.input_state_02.step_01(b1);
+        if self.input_state_02.found_prompt2():
+            self.input_state_02.found_prompt_ack_01()
+            for c2 in text1:
+                self.ser1.write((c2,))
+                b2 = self.ser1.read(1)
+                
+                if len(b2)>1:
+                    raise Exception("more than one byte returned")
+                
+                if b2 is None or len(b2)==0:
+                    raise Exception("Nothing returned, time out")
+                elif b2[0] != c2:
+                    raise Exception("wrong character returned: " + hex(b2[0]) + " expected: " + hex(c2))
+                
+            print("Text:", text1, "has been echoed after prompt")
+        
     def parse_args_01(self, test_args1 = None):
         
         p1 = argparse.ArgumentParser()
@@ -411,7 +439,76 @@ class bam_01:
                 self.test_02()
                 if b1.flag_test3:
                     b1.test_03()
+
+class input_state_01:
+    
+    def __init__(self, prompt):
+        """
+        prompt: str
+        """
+        self.state_list1 = ("wait_prompt", "in_prompt", "wait_NL")
+        self.state1 = None
+        self.prompt_01 = prompt
+        self.prompt_pos_01 = 0
+        self.found_prompt1 = False
+        self.state_debug1 = False
         
+        
+    def reset_state_01(self):
+
+        self.prompt_pos_01 = 0
+        self.state1 = "wait_prompt"
+        self.found_prompt1 = False
+        
+    def step_01(self, b1):
+        
+        state0 = self.state1
+        
+        if self.state1 == "wait_prompt":
+            self.found_prompt1 = False # only one cycle True
+            if chr(b1) == self.prompt_01[self.prompt_pos_01]:
+                self.prompt_pos_01 += 1
+                self.state1 = "in_prompt"
+        elif self.state1 == "in_prompt":
+            if chr(b1) == self.prompt_01[self.prompt_pos_01]:
+                self.prompt_pos_01 += 1
+                if self.prompt_pos_01 == len(self.prompt_01):
+                    self.state1 = "wait_NL"
+            else:
+                self.reset_state_01()
+                
+        elif self.state1 == "wait_NL":
+            if b1 == 13:
+                pass
+            elif b1 == 10:
+                self.found_prompt1 = True
+                self.state1 = "wait_prompt"
+                self.prompt_pos_01 = 0
+            else:
+                self.reset_state_01()
+                
+        if self.state_debug1:
+            print("Input:",b1, hex(b1), chr(b1), end=', ')
+            if self.state1 == state0:
+                print("State:", self.state1, end=', ')
+            else:
+                print("State:", state0, "->", self.state1, end=', ')
+            if self.state1 == "wait_prompt" or self.state1 == "in_prompt":
+                print("prompt_pos_01=", self.prompt_pos_01 , end=', ')
+                print("wait for: ", self.prompt_01[self.prompt_pos_01], end=', ')
+                
+            if self.found_prompt1:
+                print("found_prompt1", end=', ')
+                
+            print()
+                
+    def found_prompt2(self):
+        return self.found_prompt1
+    
+    def found_prompt_ack_01(self):
+        if self.found_prompt1:
+            self.found_prompt1 = False
+            
 if __name__ == '__main__':
 
     b1 = bam_01()
