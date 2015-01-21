@@ -269,8 +269,11 @@ class bam_01:
         while True:
             b2 = self.ser1.read(1)
             if b2 is None or len(b2) == 0:
-                raise Exception("None returned, time out: ")
-            
+                #raise Exception("None returned, time out: ")
+                print()
+                print("Timeout: no longer waiting for output")
+                break
+                
             for b1 in b2:
                 if self.flag_debug3:
                     print("Returned: " + hex(b1) + " '" + str(b1) + "' " + chr(b1) )
