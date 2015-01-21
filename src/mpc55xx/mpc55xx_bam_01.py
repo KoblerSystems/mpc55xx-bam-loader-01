@@ -509,7 +509,11 @@ class input_state_01:
         if self.found_prompt1:
             self.found_prompt1 = False
             
-if __name__ == '__main__':
 
+def main_01():
     b1 = bam_01()
     b1.parse_args_01()    
+
+if __name__ == '__main__':
+
+    main_01()    
