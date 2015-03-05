@@ -437,8 +437,8 @@ class bam_01:
                 
                 self.file_name1 = a1.image
                 self.test_02()
-                if b1.flag_test3:
-                    b1.test_03()
+                if self.flag_test3:
+                    self.test_03()
 
 class input_state_01:
     
