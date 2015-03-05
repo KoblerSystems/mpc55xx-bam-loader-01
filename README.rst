@@ -41,4 +41,4 @@ Execute the sourcecode::
      --sendwait SENDWAIT   Time to wait before sending a byte, in seconds, may be
                            float number
 
-There is a python package which can be installed. Please read the manual __doc/install_mpc55xx_bam_01.html
+There is a python package which can be installed. Please read the manual __http:///doc/install_mpc55xx_bam_01.html
